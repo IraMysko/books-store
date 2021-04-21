@@ -6,7 +6,7 @@ import Count from '../Count'
 import './cart.css';
 import '../Catalogue/catalogue.css';
 
-type Books = {
+export type Books = {
     id: number;
     author: string,
     name: string,
@@ -25,7 +25,11 @@ const CartItem: React.FC<Props> = ({ id, count }) => {
 
     const books: Books[] = useSelector((state: RootStateOrAny) => state.books.books);
     const book = books.find(book => book.id === id);
+
     const dispatch = useDispatch();
+
+    //@ts-ignore
+    // const sum = book.map(({ price }) => price).reduce((acc, prev) => acc + prev)
 
     const handleDeleteBook = (id: number) => {
         dispatch(removeFromCart(id))
@@ -46,19 +50,21 @@ const CartItem: React.FC<Props> = ({ id, count }) => {
     //воидфанкшен - когда не принимает аргументЫ и ничего не возвр
 
     return (
-        <div className='container-cartsbook'>
-            <div className='cartsbook-img'>
-                <img className='books-img' src={book.imgUrl} alt="" />
-            </div>
-            <div className='cartsbook-info'>
-                <div>{book.author}</div>
-                <div> {book.name}</div>
+        <>
+            <div className='container-cartsbook'>
+                <div className='cartsbook-img'>
+                    <img className='books-img' src={book.imgUrl} alt="" />
+                </div>
+                <div className='cartsbook-info'>
+                    <div>{book.author}</div>
+                    <div> {book.name}</div>
 
+                </div>
+                <Count increaseCount={handleIncreaseCount} decreaseCount={handleDecreaseCount} count={count} />
+                <div>{amount} $</div>
+                <div onClick={() => handleDeleteBook(id)} className='cartsbook-delete'></div>
             </div>
-            <Count increaseCount={handleIncreaseCount} decreaseCount={handleDecreaseCount} count={count} />
-            <div>{amount} $</div>
-            <div onClick={() => handleDeleteBook(id)} className='cartsbook-delete'></div>
-        </div>
+        </>
     )
 }
 

@@ -42,7 +42,6 @@ const Events = () => {
     const timePeriodOne = dates[0]?._d;
     const timePeriodTwo = dates[1]?._d;
 
-
     const getPeriodOfTime = events => moment(newDate).isBetween(timePeriodOne, timePeriodTwo);
 
     console.log(getPeriodOfTime(events));
