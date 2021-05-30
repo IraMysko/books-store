@@ -1,0 +1,87 @@
+.catalogue-container {
+  grid-area: catalogue;
+  color: darkgoldenrod;
+  background-color: rgb(18, 82, 104);
+}
+
+.catalogue-books {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  align-items: center;
+  justify-items: center;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
+.catalogue-btn {
+  position: relative;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.book {
+  display: block;
+  width: 300px;
+  margin: 10px;
+  color: white;
+}
+
+.book-img {
+  width: 140px;
+  height: 200px;
+}
+
+.book-buy {
+  margin-top: 5px;
+  width: 80px;
+  height: 35px;
+  background-color: darkgoldenrod;
+  text-align: center;
+  line-height: 35px;
+  color: rgb(18, 82, 104);
+  text-transform: uppercase;
+  display: inline-block;
+  font-size: 17px;
+  cursor: pointer;
+  font-family: "Shippori Mincho", serif;
+  border: none;
+  outline: none;
+}
+
+.book-buy:hover {
+  background-color: #fff;
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+  border: none;
+  outline: none;
+}
+
+.book-buy:disabled {
+  font-size: 15px;
+  line-height: 35px;
+}
+
+.btn-add {
+  width: 80px !important;
+  height: 32px !important;
+  margin-right: 10px;
+  color: black !important;
+  text-transform: uppercase;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 1.1;
+  font-family: "Shippori Mincho", serif;
+}
+
+.btn-sort {
+  text-transform: uppercase;
+  display: inline-block;
+  font-size: 17px;
+  color: black !important;
+  font-family: "Shippori Mincho", serif;
+}

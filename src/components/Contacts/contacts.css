@@ -1,0 +1,20 @@
+.contacts-container {
+    grid-area: catalogue;
+    position: relative;
+}
+
+.contacts-team {
+    display: flex;
+    flex-direction: column;
+}
+
+.team {
+    width: 180px;
+    border: solid red 1px;
+    display: inline-block;
+    margin: 10px;
+}
+
+.team-photo {
+    width: 150px;
+}

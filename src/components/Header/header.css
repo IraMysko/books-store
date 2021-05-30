@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Shippori+Mincho&display=swap");
+
+.header-container {
+    grid-area: header;
+    background-color: rgb(18, 82, 104);
+    justify-content: center;
+}
+
+.header-search-box {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 1200px;
+    height: 50px;
+}
+
+.header-title {
+    font-family: "Shippori Mincho", serif;
+    margin-right: 30px;
+    margin-left: 30px;
+    text-transform: uppercase;
+    color: darkgoldenrod;
+    font-weight: bold;
+    font-size: 19px;
+}
+
+.header-img-discount {
+    width: 30px;
+    margin-left: 170px;
+    cursor: pointer;
+}
+
+.header-img-cart {
+    width: 30px;
+    cursor: pointer;
+    margin-left: 30px;
+}
+
+.header-input {
+    width: 400px;
+    height: 35px;
+    border: none;
+    outline: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: rgb(18, 82, 104);
+}
+
+.header-button {
+    display: inline-block;
+    width: 70px;
+    height: 35px;
+    background-color: darkgoldenrod;
+    text-align: center;
+    line-height: 35px;
+    color: rgb(18, 82, 104);
+    text-transform: uppercase;
+    margin-left: 5px;
+    cursor: pointer;
+    font-family: "Shippori Mincho", serif;
+}
+
+.header-count {
+    display: inline-block;
+    background-color: darkgoldenrod;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    position: relative;
+    left: 4px;
+    bottom: 7px;
+}

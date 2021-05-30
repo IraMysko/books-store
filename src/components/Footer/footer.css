@@ -1,0 +1,5 @@
+.footer-container {
+    grid-area: footer;
+    color: darkblue;
+    background-color: rgb(153, 229, 143);
+}
