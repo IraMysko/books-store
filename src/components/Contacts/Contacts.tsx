@@ -1,48 +1,48 @@
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-
-import { useTypedSelector } from '../../hooks/typeSelector';
-import { getMembersThunkCreator } from '../../redux/members/operations';
-import photoMembers from '../../images/loreal-model-risovannye-500423.jpg';
-import './contacts.css';
+import { useTypedSelector } from "../../hooks/typeSelector";
+import { getMembersThunkCreator } from "../../redux/members/operations";
+import photoMembers from "../../images/loreal-model-risovannye-500423.jpg";
+import "./contacts.css";
+import { selectMembers } from "../../redux/members/selectors";
 
 const Contacts: React.FC = () => {
-    const members = useTypedSelector(state => state.members.members)
-    const dispatch = useDispatch();
+  const members = useTypedSelector(selectMembers);
 
-    const visibilityMembers = getVisibilityMembers(members);
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getMembersThunkCreator())
-    }, [dispatch])
+  const visibilityMembers = getVisibilityMembers(members);
 
-    return (
-        <div className="contacts-container">
-            Our Team
-            <div className='contacts-team'>
-                {visibilityMembers.map(({ name, email, city, phone }) => {
-                    return (
-                        <div className='team' key={phone}>
-                            <div>{name}</div>
-                            <div>{email}</div>
-                            <div>{city}</div>
-                            <div>{phone}</div>
-                            <img className='team-photo' src={photoMembers} alt="" />
-                        </div>
-                    )
-                }
-                )}
+  useEffect(() => {
+    dispatch(getMembersThunkCreator());
+  }, [dispatch]);
+
+  return (
+    <div className="contacts-container">
+      Our Team
+      <div className="contacts-team">
+        {visibilityMembers.map(({ name, email, city, phone }) => {
+          return (
+            <div className="team" key={phone}>
+              <div>{name}</div>
+              <div>{email}</div>
+              <div>{city}</div>
+              <div>{phone}</div>
+              <img className="team-photo" src={photoMembers} alt="" />
             </div>
-        </div >
-    )
+          );
+        })}
+      </div>
+    </div>
+  );
 };
 
 const getVisibilityMembers = (members: any) => {
-    const copiedMembers = [...members];
-    copiedMembers.length = 5;
+  const copiedMembers = [...members];
+  copiedMembers.length = 5;
 
-    return copiedMembers;
+  return copiedMembers;
 };
 
 export default Contacts;
