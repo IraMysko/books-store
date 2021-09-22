@@ -1,57 +1,21 @@
-import { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
 import { Select, Button } from "antd";
-
 import ModalNewBook from "./ModalNewBook";
-import { addToCart } from "../../redux/cart/actions";
-import { setSortType } from "../../redux/filters/actions";
-import { useTypedSelector } from "../../hooks/typeSelector";
-import { SortedType } from "../../constants";
 import "./catalogue.css";
-import { selectGroupCartBooks } from "../../redux/books/selectors";
-import { selectGroup } from "../../redux/filters/selectors";
-import { Book } from "../../redux/books/types";
+import useCatalogue from "./useCatalogue";
 
 const { Option } = Select;
 
 const Catalogue: React.FC = () => {
-  const { cart, books } = useTypedSelector(selectGroupCartBooks);
-  const { searchText, sortType } = useTypedSelector(selectGroup);
-
-  const dispatch = useDispatch();
-
-  const makeHandleAddBookToCart = (id: number) => () => {
-    dispatch(addToCart(id));
-  };
-
-  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-
-  const handleAddBook = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = useCallback(() => {
-    setIsModalVisible(false);
-  }, []);
-
-  const handleCancel = useCallback(() => {
-    setIsModalVisible(false);
-  }, []);
-
-  const sortedBooks: Book[] = getSortedBooks(sortType, books);
-
-  const visibleBooks = searchText
-    ? sortedBooks.filter(({ author, name }) => {
-        return (
-          author.toLowerCase().indexOf(searchText.toLowerCase()) > -1 ||
-          name.toLowerCase().indexOf(searchText.toLowerCase()) > -1
-        );
-      })
-    : sortedBooks;
-
-  const handleChange = (value: string) => {
-    dispatch(setSortType(value));
-  };
+  const {
+    cart,
+    handleAddBook,
+    handleChange,
+    isModalVisible,
+    handleOk,
+    handleCancel,
+    visibleBooks,
+    makeHandleAddBookToCart,
+  } = useCatalogue();
 
   return (
     <div className="catalogue-container">
@@ -104,31 +68,6 @@ const Catalogue: React.FC = () => {
       </div>
     </div>
   );
-};
-
-const getSortedBooks = (sortingType: SortedType, books: any) => {
-  switch (sortingType) {
-    case SortedType.Cheaper: {
-      return books.sort((a: any, b: any) => {
-        return a.price - b.price;
-      });
-    }
-
-    case SortedType.Expensive: {
-      return books.sort((a: any, b: any) => {
-        return b.price - a.price;
-      });
-    }
-    case SortedType.ByName: {
-      return books.sort((a: any, b: any) => {
-        if (a.author < b.author) return -1;
-        if (a.author > b.author) return 1;
-        return 0;
-      });
-    }
-    default:
-      return books;
-  }
 };
 
 export default Catalogue;

@@ -1,12 +1,8 @@
-import React, { useCallback } from "react";
-import { useDispatch } from "react-redux";
-
-import { removeFromCart, setCartCount } from "../../redux/cart/actions";
-import { useTypedSelector } from "../../hooks/typeSelector";
+import React from "react";
 import Count from "../Count";
 import "./cart.css";
 import "../Catalogue/catalogue.css";
-import { selectBook } from "../../redux/books/selectors";
+import useCartBook from "./useCartBook";
 
 interface Props {
   id: number;
@@ -14,24 +10,15 @@ interface Props {
 }
 
 const CartItem: React.FC<Props> = ({ id, count }) => {
-  const dispatch = useDispatch();
-
-  const book = useTypedSelector((state) => selectBook(state, { id }));
-
-  const makeHandleDeleteBook = (id: number) => () => {
-    dispatch(removeFromCart(id));
-  };
-
-  const handleIncreaseCount = useCallback(() => {
-    dispatch(setCartCount(id, count + 1));
-  }, [dispatch, id, count]);
-
-  const handleDecreaseCount = useCallback(() => {
-    dispatch(setCartCount(id, count - 1));
-    if (count <= 1) {
-      dispatch(removeFromCart(id));
-    }
-  }, [dispatch, id, count]);
+  const {
+    book,
+    makeHandleDeleteBook,
+    handleDecreaseCount,
+    handleIncreaseCount,
+  } = useCartBook({
+    id,
+    count,
+  });
 
   if (!book) {
     return null;

@@ -1,23 +1,10 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-
-import { useTypedSelector } from "../../hooks/typeSelector";
-import { getMembersThunkCreator } from "../../redux/members/operations";
+import React from "react";
 import photoMembers from "../../images/loreal-model-risovannye-500423.jpg";
 import "./contacts.css";
-import { selectMembers } from "../../redux/members/selectors";
+import useContacts from "./useContacts";
 
 const Contacts: React.FC = () => {
-  const members = useTypedSelector(selectMembers);
-
-  const dispatch = useDispatch();
-
-  const visibilityMembers = getVisibilityMembers(members);
-
-  useEffect(() => {
-    dispatch(getMembersThunkCreator());
-  }, [dispatch]);
-
+  const { visibilityMembers } = useContacts();
   return (
     <div className="contacts-container">
       Our Team
@@ -36,13 +23,6 @@ const Contacts: React.FC = () => {
       </div>
     </div>
   );
-};
-
-const getVisibilityMembers = (members: any) => {
-  const copiedMembers = [...members];
-  copiedMembers.length = 5;
-
-  return copiedMembers;
 };
 
 export default Contacts;

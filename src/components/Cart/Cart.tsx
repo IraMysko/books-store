@@ -2,8 +2,7 @@ import React from "react";
 import { Modal } from "antd";
 
 import CartsBook from "./CartsBook";
-import { useTypedSelector } from "../../hooks/typeSelector";
-import { selectGroupCartBooks } from "../../redux/books/selectors";
+import useCart from "./useCart";
 
 interface Props {
   visible: boolean;
@@ -12,18 +11,7 @@ interface Props {
 }
 
 const Cart: React.FC<Props> = ({ visible, onOk, onCancel }) => {
-  const { cart, books } = useTypedSelector(selectGroupCartBooks);
-
-  const isCartEmpty = !cart.length;
-
-  const allSum = cart.reduce((acc, cartItem) => {
-    const book = books.find((book) => book.id === cartItem.id);
-    const price = book?.price || 0;
-    const sum = Math.round(price * cartItem.count);
-
-    return acc + sum;
-  }, 0);
-
+  const { isCartEmpty, cart, allSum } = useCart();
   return (
     <Modal
       title="Basic Modal"
